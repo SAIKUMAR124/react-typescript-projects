@@ -3,3 +3,31 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+.b{
+  border: 2px solid red;
+}
+
+.inline{
+  display: inline;
+}
+
+.block{
+  display: block;
+}
+
+.d-flex{
+  display: flex;
+}
+
+.justify-center{
+  display: flex;
+  justify-content: center;
+}
+.mr-1{
+  margin-right: 1rem;
+}
+
+.mb-10px{
+  margin-bottom: 10px;
+}

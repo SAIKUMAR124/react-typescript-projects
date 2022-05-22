@@ -5,12 +5,14 @@ import Home from "./Pages/Home";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/form" element={<FormikForm />} />
-      </Routes>
-    </Router>
+    <div role="main">
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/form" element={<FormikForm />} />
+        </Routes>
+      </Router>
+    </div>
   );
 }
 
