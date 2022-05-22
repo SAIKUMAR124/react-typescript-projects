@@ -1,4 +1,5 @@
-import { Field, Formik } from "formik";
+import { ErrorMessage, Field, Formik, yupToFormErrors } from "formik";
+import * as yup from "yup";
 import "./FormikForm.css";
 
 interface FormModel {
@@ -29,7 +30,37 @@ const FormikForm = () => {
         }}
         onSubmit={(values) => {
           alert(JSON.stringify(values));
+          
         }}
+        validationSchema={yup.object().shape({
+          name: yup
+            .string()
+            .required("Please Enter your name")
+            .min(3, "Must be 3 characters and more")
+            .max(10, "Must be 15 characters and less"),
+
+          email: yup
+            .string()
+            .required("Email is Required")
+            .matches(
+              /([a-zA-Z0-9_.-]+)@([a-zA-Z]+)([.])([a-zA-Z]+)/g,
+              "Please enter a valid email address."
+            ),
+
+          password: yup
+            .string()
+            .required("Please Enter your password")
+            .min(3, "Must be 3 characters and more")
+            .max(10, "Must be 15 characters and less"),
+
+          age: yup
+            .number()
+            .required("Please Enter your age")
+            .min(18, "You must have 18 years to signup")
+            .max(110, "Are you sure, Your age is correct"),
+
+          gender: yup.string().required("Please Select your gender"),
+        })}
       >
         {({
           handleSubmit,
@@ -49,6 +80,9 @@ const FormikForm = () => {
               onChange={handleChange}
               onBlur={handleBlur}
             />
+            {touched.name && errors.name !== "" ? (
+              <div className="mb-10px red">{errors.name}</div>
+            ) : null}
 
             <input
               className="regform-input"
@@ -59,6 +93,9 @@ const FormikForm = () => {
               onChange={handleChange}
               onBlur={handleBlur}
             />
+            {touched.email && errors.email !== "" ? (
+              <div className="mb-10px red">{errors.email}</div>
+            ) : null}
 
             <input
               className="regform-input"
@@ -69,16 +106,22 @@ const FormikForm = () => {
               onChange={handleChange}
               onBlur={handleBlur}
             />
+            {touched.password && errors.password !== "" ? (
+              <div className="mb-10px red">{errors.password}</div>
+            ) : null}
 
             <input
               className="regform-input"
-              type="text"
+              type="number"
               placeholder="Enter your age"
               name="age"
               value={values.age}
               onChange={handleChange}
               onBlur={handleBlur}
             />
+            {touched.age && errors.age !== "" ? (
+              <div className="mb-10px red">{errors.age}</div>
+            ) : null}
 
             <div className="d-flex mb-10px">
               <div id="my-radio-group" className="mr-1">
@@ -117,6 +160,9 @@ const FormikForm = () => {
                 </label>
               </div>
             </div>
+            {touched.gender && errors.gender !== "" ? (
+              <div className="mb-10px red">{errors.gender}</div>
+            ) : null}
 
             <div className="d-flex mb-10px">
               <div id="checkbox-group" className="mr-1">
@@ -166,7 +212,9 @@ const FormikForm = () => {
             />
 
             <br />
-            <button type="submit" className="regform-submit-btn">Submit</button>
+            <button type="submit" className="regform-submit-btn">
+              Submit
+            </button>
           </form>
         )}
       </Formik>
