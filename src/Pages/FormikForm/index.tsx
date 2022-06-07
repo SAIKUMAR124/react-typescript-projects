@@ -1,6 +1,7 @@
 import { ErrorMessage, Field, Formik, yupToFormErrors } from "formik";
 import * as yup from "yup";
 import "./FormikForm.css";
+import { useNavigate } from "react-router-dom";
 
 interface FormModel {
   name: string;
@@ -14,6 +15,8 @@ interface FormModel {
 }
 
 const FormikForm = () => {
+  const navigate = useNavigate();
+
   return (
     <div role="form">
       <h1 className="regform-heading">Registration Form</h1>
@@ -29,8 +32,8 @@ const FormikForm = () => {
           description: "",
         }}
         onSubmit={(values) => {
-          alert(JSON.stringify(values));
-          
+          console.log(JSON.stringify(values));
+          navigate("/form/submit");
         }}
         validationSchema={yup.object().shape({
           name: yup

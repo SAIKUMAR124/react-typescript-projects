@@ -1,7 +1,13 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Outlet,
+  Route,
+  Routes,
+} from "react-router-dom";
 import "./App.css";
 import FormikForm from "./Pages/FormikForm";
 import Home from "./Pages/Home";
+import SubmitPage from "./Pages/FormikForm/SubmitPage";
 
 function App() {
   return (
@@ -9,7 +15,10 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/form" element={<FormikForm />} />
+          <Route path="/form" element={<Outlet />}>
+            <Route index element={<FormikForm />} />
+            <Route path="submit" element={<SubmitPage />} />
+          </Route>
         </Routes>
       </Router>
     </div>
